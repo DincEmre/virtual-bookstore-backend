@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: virtualbookstore-db
+    restart: always
+    ports:
+      - "5432:5432"  # DataGrip bu porttan erişecek
+    environment:
+      POSTGRES_DB: virtualbookstore
+      POSTGRES_USER: dincdev
+      POSTGRES_PASSWORD: bookpass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
