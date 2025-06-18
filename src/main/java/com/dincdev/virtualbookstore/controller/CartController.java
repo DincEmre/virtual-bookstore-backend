@@ -2,17 +2,18 @@ package com.dincdev.virtualbookstore.controller;
 
 import com.dincdev.virtualbookstore.entity.*;
 import com.dincdev.virtualbookstore.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.*;
 
 @RestController
 @RequestMapping("/api/cart")
+@RequiredArgsConstructor
 public class CartController {
-    @Autowired private CartItemRepository cartItemRepo;
-    @Autowired private UserRepository userRepo;
-    @Autowired private BookRepository bookRepo;
+    private final CartItemRepository cartItemRepo;
+    private final UserRepository userRepo;
+    private final BookRepository bookRepo;
 
     @GetMapping
     public List<CartItem> viewCart(Principal principal) {

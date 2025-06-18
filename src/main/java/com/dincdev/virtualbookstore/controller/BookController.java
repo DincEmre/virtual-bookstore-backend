@@ -2,15 +2,16 @@ package com.dincdev.virtualbookstore.controller;
 
 import com.dincdev.virtualbookstore.entity.Book;
 import com.dincdev.virtualbookstore.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
 @RequestMapping("/api/books")
+@RequiredArgsConstructor
 public class BookController {
-    @Autowired
-    private BookRepository bookRepository;
+
+    private final BookRepository bookRepository;
 
     @GetMapping
     public List<Book> getAllBooks() {
@@ -20,5 +21,10 @@ public class BookController {
     @GetMapping("/{id}")
     public Book getBook(@PathVariable Long id) {
         return bookRepository.findById(id).orElseThrow();
+    }
+
+    @PostMapping("/save")
+    public Book saveBook(@RequestBody Book book) {
+        return bookRepository.save(book);
     }
 }

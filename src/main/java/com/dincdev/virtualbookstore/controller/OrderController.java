@@ -2,7 +2,7 @@ package com.dincdev.virtualbookstore.controller;
 
 import com.dincdev.virtualbookstore.entity.*;
 import com.dincdev.virtualbookstore.repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.security.Principal;
@@ -11,11 +11,12 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/order")
+@RequiredArgsConstructor
 public class OrderController {
-    @Autowired private OrderRepository orderRepo;
-    @Autowired private OrderItemRepository orderItemRepo;
-    @Autowired private CartItemRepository cartRepo;
-    @Autowired private UserRepository userRepo;
+    private final OrderRepository orderRepo;
+    private final OrderItemRepository orderItemRepo;
+    private final CartItemRepository cartRepo;
+    private final UserRepository userRepo;
 
     @PostMapping("/checkout")
     public Order checkout(Principal principal) {

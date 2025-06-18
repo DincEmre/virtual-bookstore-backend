@@ -14,11 +14,16 @@ public class OrderItem {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 
+    @Column(name = "quantity", nullable = false)
     private int quantity;
+
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 }
