@@ -1,8 +1,12 @@
 package com.dincdev.virtualbookstore.controller;
 
+import com.dincdev.virtualbookstore.dto.BookRequestDTO;
+import com.dincdev.virtualbookstore.dto.BookResponseDTO;
 import com.dincdev.virtualbookstore.entity.Book;
 import com.dincdev.virtualbookstore.repository.BookRepository;
+import com.dincdev.virtualbookstore.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -11,20 +15,21 @@ import java.util.*;
 @RequiredArgsConstructor
 public class BookController {
 
-    private final BookRepository bookRepository;
+    private final BookService bookService;
 
     @GetMapping
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+    public List<BookResponseDTO> getAllBooks() {
+        return bookService.getAllBooks();
     }
 
     @GetMapping("/{id}")
-    public Book getBook(@PathVariable Long id) {
-        return bookRepository.findById(id).orElseThrow();
+    public BookResponseDTO getBook(@PathVariable Long id) {
+        return  bookService.getBookById(id);
     }
 
     @PostMapping("/save")
-    public Book saveBook(@RequestBody Book book) {
-        return bookRepository.save(book);
+    public ResponseEntity<BookResponseDTO> saveBook(@RequestBody BookRequestDTO requestDTO) {
+        BookResponseDTO response = bookService.saveBook(requestDTO);
+        return ResponseEntity.ok(response);
     }
 }
