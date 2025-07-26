@@ -17,15 +17,22 @@ public class Book {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "author", nullable = false)
+    private String author;
+
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "isbn", nullable = false)
+    @Column(name = "isbn")
     private String isbn;
 
-    @Column(name = "price", nullable = false)
+    @Column(name = "price")
     private BigDecimal price;
 
     @Column(name = "coverImageUrl")
     private String coverImageUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 }

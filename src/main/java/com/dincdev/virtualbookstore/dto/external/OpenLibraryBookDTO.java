@@ -16,4 +16,6 @@ public class OpenLibraryBookDTO {
     private Integer firstPublishYear;
 
     private List<String> isbn;
+
+    private List<String> subject;
 }
