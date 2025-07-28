@@ -43,17 +43,7 @@ public class OpenLibraryService {
 
             // Book Entity kaydet
             Book book = new Book(null, title, author, null, null, null, null, category);
-            Book savedBook = bookRepository.save(book);
-
-            // Elasticsearch'e kaydet
-            BookDocument document = new BookDocument(
-                    savedBook.getId().toString(),
-                    title,
-                    author,
-                    categoryName,
-                    null
-            );
-            elasticRepository.save(document);
+            bookRepository.save(book);
         }
     }
 }
